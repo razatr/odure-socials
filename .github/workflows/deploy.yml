@@ -21,7 +21,7 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Build CRA
-        run: yarn build
+        run: PUBLIC_URL=/socials yarn build
 
       - name: Clean target folder
         uses: appleboy/scp-action@v0.1.7
