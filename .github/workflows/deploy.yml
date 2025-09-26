@@ -24,7 +24,14 @@ jobs:
         run: yarn build
 
       - name: Clean target folder
-        run: ssh -i ${{ secrets.SSH_KEY }} ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "rm -rf /var/www/socials/build/*"
+        uses: appleboy/scp-action@v0.1.7
+        with:
+            host: ${{ secrets.SERVER_HOST }}       # например 123.45.67.89
+            username: ${{ secrets.SERVER_USER }}  # deploy
+            key: ${{ secrets.SSH_KEY }}           # приватный ключ как секрет
+            source: "build/*"
+            target: "/var/www/socials/build/"
+            overwrite: true
 
       - name: Deploy build to server
         uses: appleboy/scp-action@v0.1.7
