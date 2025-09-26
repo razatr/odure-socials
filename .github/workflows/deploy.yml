@@ -23,6 +23,9 @@ jobs:
       - name: Build CRA
         run: yarn build
 
+      - name: Clean target folder
+        run: ssh -i ${{ secrets.SSH_KEY }} ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "rm -rf /var/www/socials/build/*"
+
       - name: Deploy build to server
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -30,4 +33,8 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_KEY }}
           source: "build/*"
-          target: "/var/www/socials/"
+          target: "/var/www/socials/build/"
+          overwrite: true
+
+      - name: Set permissions for Nginx
+        run: ssh -i ${{ secrets.SSH_KEY }} ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "chown -R www-data:www-data /var/www/socials/build && chmod -R 755 /var/www/socials/build"
