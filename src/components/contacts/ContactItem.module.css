@@ -1,0 +1,40 @@
+.item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 0.375rem;
+  background-color: #fff;
+  text-decoration: none;
+  color: inherit;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.item:hover {
+  background-color: #f9f9f9;
+  border-color: #ccc;
+}
+
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.value {
+  font-size: 0.875rem;
+  color: #555;
+}
